@@ -12,6 +12,7 @@ namespace Codebase.View
         [SerializeField] private TextMeshProUGUI _questionText;
         [SerializeField] private AnswerButton _answerTemplate;
         [SerializeField] private Transform _answersContainer;
+        
         private ObjectPool<AnswerButton> _answerButtonPool;
         private IList<AnswerButton> _activeButtons;
         private IQuiz _currentQuiz;
@@ -34,9 +35,9 @@ namespace Codebase.View
             );
         }
 
-        public void Render(IQuiz value)
+        public void Render(IQuiz quizForRendering)
         {
-            _currentQuiz = value;
+            _currentQuiz = quizForRendering;
 
             foreach (var button in _activeButtons)
                 _answerButtonPool.Push(button);
