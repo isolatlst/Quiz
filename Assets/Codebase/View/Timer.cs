@@ -12,6 +12,7 @@ namespace Codebase.View
         [SerializeField] private Image _fillImage;
         private Slider _slider;
         public event Action TimerEnd;
+        public float RemainigTime => _slider.value;
 
         private void Awake()
         {

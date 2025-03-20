@@ -14,13 +14,13 @@ namespace Codebase.View
         [SerializeField] private Transform _answersContainer;
         
         private ObjectPool<AnswerButton> _answerButtonPool;
-        private IList<AnswerButton> _activeButtons;
+        private IList<AnswerButton> _activeButtons = new List<AnswerButton>();
         private IQuiz _currentQuiz;
 
-        private void Awake()
+        public void Start()
         {
             _answerButtonPool = new ObjectPool<AnswerButton>(
-                _currentQuiz.Variants.Count,
+                _currentQuiz?.Variants.Count ?? 5, // <- magic number, i know
                 () =>
                 {
                     var answ = Instantiate(_answerTemplate, _answersContainer);
@@ -38,7 +38,9 @@ namespace Codebase.View
         public void Render(IQuiz quizForRendering)
         {
             _currentQuiz = quizForRendering;
-
+            
+            _questionText.text = quizForRendering.Question;
+            
             foreach (var button in _activeButtons)
                 _answerButtonPool.Push(button);
             

@@ -7,7 +7,7 @@ namespace Codebase.Quiz
 {
     public class AwaitCurrentAnswerQuiz : IQuiz
     {
-        private IQuiz _origin;
+        private readonly IQuiz _origin;
         private bool _isCorrect;
         private readonly IReadOnlyList<string> _variants;
 
@@ -28,7 +28,6 @@ namespace Codebase.Quiz
 
             return result;
         }
-
 
         public IEnumerator WaitCorrect()
         {
